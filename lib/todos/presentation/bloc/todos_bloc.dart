@@ -5,16 +5,18 @@ import 'todos_event.dart';
 import 'todos_states.dart';
 
 class TodosBloc extends Bloc<TodosEvent, TodosState> {
-  TodosBloc(super.initialState);
-}
+  TodosBloc() : super(TodosInitial()){
+    on<ShowTodos>(_showTodos);
+  }
 
-Future<void> _showTodos(event, emit) async {
-  emit(TodosLoading());
-  try {
-    final List<String> todos = await showTodosFunction();
-    emit(TodosLoaded(todos));
-  } catch (error) {
-    emit(TodosException(error.toString()));
+  Future<void> _showTodos(event, emit) async {
+    emit(TodosLoading());
+    try {
+      final List<String> todos = await showTodosFunction();
+      emit(TodosLoaded(todos));
+    } catch (error) {
+      emit(TodosException(error.toString()));
+    }
   }
 }
 
