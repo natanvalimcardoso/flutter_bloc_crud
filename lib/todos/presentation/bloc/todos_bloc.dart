@@ -23,3 +23,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 List<String> showTodosFunction() {
   return TodosRepositoryFake.todos;
 }
+
+ addTodo(){
+    
+ } 
