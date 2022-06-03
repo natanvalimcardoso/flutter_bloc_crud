@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               if (_textController.text.length > 0) {
                 setState(() {
-                 TodosRepositoryFake.todos.add(_textController.text);
+                //  TodosRepositoryFake.todos.add(_textController.text);
                 });
                 _textController.clear();
               }
@@ -44,19 +44,19 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.only(top: 20),
             height: 400,
             child: ListView.builder(
-              itemCount: TodosRepositoryFake.todos.length,
+              // itemCount: TodosRepositoryFake.todos.length,
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 3,
                   child: ListTile(
-                    title: Text(TodosRepositoryFake.todos[index]),
+                    // title: Text(TodosRepositoryFake.todos[index]),
                     trailing: const Icon(
                       Icons.delete,
                       color: Colors.red,
                     ),
                     onTap: () {
                       setState(() {
-                        TodosRepositoryFake.todos.remove(TodosRepositoryFake.todos[index]);
+                        // TodosRepositoryFake.todos.remove(TodosRepositoryFake.todos[index]);
                       });
                     },
                     onLongPress: () {
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                             ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                                  TodosRepositoryFake.todos[index] = _textControllerEdit.text;
+                                  // TodosRepositoryFake.todos[index] = _textControllerEdit.text;
                                   Navigator.pop(context);
                                 });
                               },

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class TodosState extends Equatable {
+ class TodosState extends Equatable {
   const TodosState();
 
   @override
