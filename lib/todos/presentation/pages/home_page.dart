@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_2/todos/domain/model/todos_model.dart';
 
 import '../bloc/todos_bloc.dart';
 import '../bloc/todos_event.dart';
@@ -18,19 +19,12 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _textControllerEdit = TextEditingController();
   TodosRepositoryFake todosRepository = TodosRepositoryFake();
 
-  late final TodosBloc bloc;
-  @override
-  void initState() {
-    super.initState();
-    bloc = TodosBloc();
-    bloc.add(ShowTodos(todosRepository.todos));
-  }
+  final TodosBloc bloc = TodosBloc()..add(const ShowTodos([]));
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Column(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
@@ -44,10 +38,10 @@ class _HomePageState extends State<HomePage> {
           ),
           ElevatedButton(
             onPressed: () {
-              if (_textController.text.length > 0) {
+              if (_textController.text.isNotEmpty) {
                 setState(() {
-                  //  TodosRepositoryFake.todos.add(_textController.text);
-                  bloc.add(AddTodo(todo: _textController.text));
+                  bloc.add(
+                      AddTodo(todo: TodosModel(title: _textController.text)));
                 });
                 _textController.clear();
               }
@@ -65,20 +59,18 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if(state is TodosInitial){
-                  return const Center(
-                    child: Text('A lista está vazia')
-                  );
+                if (state is TodosInitial) {
+                  return const Center(child: Text('A lista está vazia'));
                 }
                 if (state is TodosLoaded) {
                   final todosList = state.todos;
                   return ListView.builder(
-                    itemCount: todosRepository.todos.length,
+                    itemCount: todosList.length,
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 3,
                         child: ListTile(
-                          // title: Text(TodosRepositoryFake.todos[index]),
+                          title: Text(todosList[index].title),
                           trailing: const Icon(
                             Icons.delete,
                             color: Colors.red,

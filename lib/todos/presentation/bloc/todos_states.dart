@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../domain/model/todos_model.dart';
+
  class TodosState extends Equatable {
   const TodosState();
 
@@ -22,9 +24,9 @@ class TodosInitial extends TodosState {
 //-------------------- /Carregado/ -------------------//
 
 class TodosLoaded extends TodosState {
-  final List<String> todos;
+  final List<TodosModel > todos;
 
-  const TodosLoaded(this.todos);
+  const TodosLoaded({required this.todos});
 
   @override
   List<Object> get props => [todos];

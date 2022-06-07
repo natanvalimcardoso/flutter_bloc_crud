@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc_2/todos/domain/model/todos_model.dart';
 
 abstract class TodosEvent extends Equatable {
   const TodosEvent();
@@ -20,7 +21,7 @@ class ShowTodos extends TodosEvent {
 //-------------------- /Adicionar na lista/ -------------------//
 
 class AddTodo extends TodosEvent {
-  final String todo;
+  final TodosModel todo;
   const AddTodo({required this.todo});
 
   @override

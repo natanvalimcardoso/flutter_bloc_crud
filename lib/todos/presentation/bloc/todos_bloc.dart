@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_2/todos/domain/model/todos_model.dart';
 
 import '../repository/todos_repository.dart';
 import 'todos_event.dart';
@@ -9,15 +10,26 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   TodosBloc() : super(const TodosInitial()) {
     on<AddTodo>(_createTodos);
-    // on<ShowTodos>(_onShowTodos);
+    on<ShowTodos>(_onShowTodos);
   }
+
   Future<void> _createTodos(event, emit) async {
     emit(TodosLoading());
     try {
       final todos = await todosRepository.addTodos(event.todo);
-      emit(TodosLoaded(todos));
+      emit(TodosLoaded(todos: todos));
     } catch (e) {
       emit(TodosException(e.toString()));
+    }
+  }
+
+  Future<void> _onShowTodos(event, emit) async {
+    emit(TodosLoading());
+    try {
+      final List<TodosModel> todos = await todosRepository.showTodos(event.todo);
+      emit(TodosLoaded(todos: todos));
+    } catch (error) {
+      emit(TodosException(error.toString()));
     }
   }
 }
@@ -34,20 +46,3 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
 
 
- // Future<void> _onShowTodos(event, emit) async {
-  //   emit(TodosLoading());
-  //   try {
-  //     final List<String> todos = await showTodosFunction();
-  //     emit(TodosLoaded(todos));
-  //   } catch (error) {
-  //     emit(TodosException(error.toString()));
-  //   }
-  // }
-
-  // List<String> showTodosFunction() {
-//   return TodosRepositoryFake.todos;
-// }
-
-//  addTodo(){
-    
-//  } 

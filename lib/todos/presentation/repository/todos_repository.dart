@@ -1,20 +1,25 @@
 import '../../domain/model/todos_model.dart';
 
 class TodosRepositoryFake {
-  List<String> todos = [];
+  List<TodosModel> _todos = [];
 
-  List<String> deleteTodos(TodosModel todosModel) {
-    todos.remove(todosModel.title);
-    return todos;
+  List<TodosModel> deleteTodos(TodosModel todosModel) {
+    _todos.remove(todosModel.title);
+    return _todos;
   }
 
-  List<String> addTodos(TodosModel todosModel) {
-    todos.add(todosModel.title);
-    return todos;
+  List<TodosModel> addTodos(TodosModel todosModel) {
+    _todos.add(todosModel);
+    return _todos;
   }
 
-  List<String> updateTodos(TodosModel todosModel) {
-    todos[todos.indexOf(todosModel.title)] = todosModel.title;
-    return todos;
+  List<TodosModel> updateTodos(TodosModel todosModel) {
+    _todos.removeWhere((todo) => todo.title == todosModel.title);
+    _todos.add(todosModel);
+    return _todos;
+  }
+
+  List<TodosModel> showTodos(TodosModel todosModel) {
+    return _todos;
   }
 }
