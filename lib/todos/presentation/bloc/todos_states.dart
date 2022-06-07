@@ -13,7 +13,7 @@ class TodosLoading extends TodosState {
   const TodosLoading();
 }
 
-//-------------------- /Inicial/ -------------------//
+//-------------------- /Inicial ou vazio/ -------------------//
 
 class TodosInitial extends TodosState {
   const TodosInitial();

@@ -21,7 +21,7 @@ class ShowTodos extends TodosEvent {
 
 class AddTodo extends TodosEvent {
   final String todo;
-  const AddTodo(this.todo);
+  const AddTodo({required this.todo});
 
   @override
   List<Object> get props => [];
