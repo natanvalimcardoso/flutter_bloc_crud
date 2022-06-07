@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_2/todos/domain/model/todos_model.dart';
-import 'package:flutter_bloc_2/todos/presentation/repository/todos_repository.dart';
 
 import 'todos_event.dart';
 import 'todos_states.dart';
