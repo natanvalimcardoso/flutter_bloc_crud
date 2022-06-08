@@ -11,9 +11,6 @@ abstract class TodosEvent extends Equatable {
 //-------------------- /Mostrar a lista/ -------------------//
 
 class ShowTodos extends TodosEvent {
-  final List<String> todos;
-  const ShowTodos(this.todos);
-
   @override
   List<Object> get props => [];
 }
@@ -31,8 +28,9 @@ class AddTodo extends TodosEvent {
 //-------------------- /Remover da lista/ -------------------//
 
 class RemoveTodo extends TodosEvent {
-  final String id;
-  const RemoveTodo(this.id);
+  final TodosModel todo;
+
+  const RemoveTodo({required this.todo});
 
   @override
   List<Object> get props => [];
@@ -41,9 +39,8 @@ class RemoveTodo extends TodosEvent {
 //-------------------- /Editar na lista/ -------------------//
 
 class UpdateTodo extends TodosEvent {
-  final String id;
-  final String updatedTodo;
-  const UpdateTodo(this.id, this.updatedTodo);
+  final TodosModel todo;
+  const UpdateTodo(this.todo);
 
   @override
   List<Object> get props => [];

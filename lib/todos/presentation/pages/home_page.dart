@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_2/todos/domain/model/todos_model.dart';
 
+import '../../domain/model/todos_model.dart';
 import '../bloc/todos_bloc.dart';
 import '../bloc/todos_event.dart';
 import '../bloc/todos_states.dart';
 import '../repository/todos_repository.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _textControllerEdit = TextEditingController();
   TodosRepositoryFake todosRepository = TodosRepositoryFake();
 
-  final TodosBloc bloc = TodosBloc()..add(const ShowTodos([]));
+  final TodosBloc bloc = TodosBloc()..add(ShowTodos());
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           onTap: () {
                             setState(() {
-                              // TodosRepositoryFake.todos.remove(TodosRepositoryFake.todos[index]);
+                              bloc.add(RemoveTodo(todo: todosList[index]));
                             });
                           },
                           onLongPress: () {

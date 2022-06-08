@@ -3,9 +3,9 @@ import 'dart:ffi';
 import 'package:equatable/equatable.dart';
 
 class TodosModel extends Equatable {
-  final String title;
+   String title;
 
-  TodosModel({
+   TodosModel({
     required this.title,
   });
 

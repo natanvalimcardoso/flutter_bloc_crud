@@ -1,10 +1,10 @@
 import '../../domain/model/todos_model.dart';
 
 class TodosRepositoryFake {
-  List<TodosModel> _todos = [];
+  final List<TodosModel> _todos = [];
 
   List<TodosModel> deleteTodos(TodosModel todosModel) {
-    _todos.remove(todosModel.title);
+    _todos.remove(_todos.firstWhere((element) => element.title == todosModel.title));
     return _todos;
   }
 
@@ -19,7 +19,7 @@ class TodosRepositoryFake {
     return _todos;
   }
 
-  List<TodosModel> showTodos(TodosModel todosModel) {
+  showTodos() {
     return _todos;
   }
 }
