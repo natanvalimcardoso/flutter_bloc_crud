@@ -40,7 +40,8 @@ class RemoveTodo extends TodosEvent {
 
 class UpdateTodo extends TodosEvent {
   final TodosModel todo;
-  const UpdateTodo(this.todo);
+
+  const UpdateTodo({required this.todo});
 
   @override
   List<Object> get props => [];

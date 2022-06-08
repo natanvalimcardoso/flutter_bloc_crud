@@ -94,6 +94,7 @@ class _HomePageState extends State<HomePage> {
                                   ElevatedButton(
                                     onPressed: () {
                                       setState(() {
+                                        bloc.add(UpdateTodo(todo: todosList[index]));
                                         // TodosRepositoryFake.todos[index] = _textControllerEdit.text;
                                         Navigator.pop(context);
                                       });

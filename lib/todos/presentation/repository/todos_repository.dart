@@ -14,7 +14,7 @@ class TodosRepositoryFake {
   }
 
   List<TodosModel> updateTodos(TodosModel todosModel) {
-    _todos.removeWhere((todo) => todo.title == todosModel.title);
+    _todos.remove(_todos.firstWhere((element) => element.title == todosModel.title));
     _todos.add(todosModel);
     return _todos;
   }
