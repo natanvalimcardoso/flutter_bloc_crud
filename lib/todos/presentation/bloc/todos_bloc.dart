@@ -22,14 +22,13 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     emit(TodosLoaded(todos: todosRepository.deleteTodos(event.todo)));
   }
 
-  _onShowTodos(ShowTodos event, emit) {
+  _onUpdateTodos(UpdateTodo event, emit) {
+    emit(TodosLoaded( todos: todosRepository.updateTodos(event.todo, event.title)));
+  }
+
+   _onShowTodos(ShowTodos event, emit) {
     emit(TodosLoaded(todos: todosRepository.showTodos()));
   }
-
-  _onUpdateTodos(UpdateTodo event, emit) {
-    emit(TodosLoaded(todos: todosRepository.updateTodos(event.todo)));
-  }
-
 }
 
   // Future<void> _onCreateTodos(event, emit) async {
