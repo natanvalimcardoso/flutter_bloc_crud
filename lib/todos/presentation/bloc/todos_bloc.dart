@@ -15,7 +15,6 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   }
 
   Future<void> _onCreateTodos(event, emit) async {
-    emit(const TodosLoading());
     try {
       final todos = todosRepository.addTodos(event.todo);
       emit(TodosLoaded(todos: todos));

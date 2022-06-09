@@ -4,8 +4,7 @@ class TodosRepositoryFake {
   final List<TodosModel> _todosList = [];
 
   List<TodosModel> deleteTodos(TodosModel todosModel) {
-    _todosList.remove(
-        _todosList.firstWhere((element) => element.title == todosModel.title));
+    _todosList.remove(_todosList.firstWhere((element) => element.title == todosModel.title));
     return _todosList;
   }
 

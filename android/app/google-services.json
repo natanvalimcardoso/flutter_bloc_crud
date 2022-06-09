@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1053948309621",
+    "project_id": "crud-natan",
+    "storage_bucket": "crud-natan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053948309621:android:c7c4cf3388878abb57083c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_bloc_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053948309621-o8g0f9ncjhabhr9dbslmcplr7o93tmj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCTSnCy3f1Fclad373zzOr2pnHHd4tUXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053948309621-o8g0f9ncjhabhr9dbslmcplr7o93tmj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

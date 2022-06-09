@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_2/todos/datasource/datasource.dart';
 
 import '../../domain/model/todos_model.dart';
 import '../bloc/todos_bloc.dart';
@@ -21,6 +22,19 @@ class _HomePageState extends State<HomePage> {
 
   final TodosBloc bloc = TodosBloc()..add(ShowTodos());
 
+  late Datasource datasource;
+  List docs = [];
+
+  iniciar(){ //serve para iniciar o banco de dados
+    datasource = Datasource();
+    datasource.initiliase(); // puxa la da datasource
+    datasource.read().then((value) => {
+      setState((){
+        docs = value;
+      })
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -40,6 +54,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               if (_textController.text.isNotEmpty) {
                 setState(() {
+                  // addTodo(title: _textController.text);
                   bloc.add(
                       AddTodo(todo: TodosModel(title: _textController.text)));
                 });
@@ -58,9 +73,6 @@ class _HomePageState extends State<HomePage> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }
-                if (state is TodosInitial) {
-                  return const Center(child: Text('A lista está vazia'));
                 }
                 if (state is TodosLoaded) {
                   final todosList = state.todos;
@@ -122,3 +134,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+  
