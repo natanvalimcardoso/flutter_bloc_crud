@@ -14,49 +14,62 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     on<UpdateTodo>(_onUpdateTodos);
   }
 
-  _onCreateTodos(AddTodo event, emit) {
-    emit(TodosLoaded(todos: todosRepository.addTodos(event.todo)));
+  Future<void> _onCreateTodos(event, emit) async {
+    emit(const TodosLoading());
+    try {
+      final todos = todosRepository.addTodos(event.todo);
+      emit(TodosLoaded(todos: todos));
+    } catch (e) {
+      emit(TodosException(e.toString()));
+    }
+  }
+  
+  Future<void> _onDeleteTodos(event, emit) async {
+    try {
+      final todos = todosRepository.deleteTodos(event.todo);
+      emit(TodosLoaded(todos: todos));
+    } catch (error) {
+      emit(TodosException(error.toString()));
+    }
   }
 
-  _onDeleteTodos(RemoveTodo event, emit) {
-    emit(TodosLoaded(todos: todosRepository.deleteTodos(event.todo)));
+  Future<void> _onUpdateTodos(UpdateTodo event, emit) async {
+    try {
+      final todos = todosRepository.updateTodos(event.todo, event.title);
+      emit(TodosLoaded(todos: todos));
+    } catch (error) {
+      emit(TodosException(error.toString()));
+    }
   }
 
-  _onUpdateTodos(UpdateTodo event, emit) {
-    emit(TodosLoaded( todos: todosRepository.updateTodos(event.todo, event.title)));
-  }
-
-   _onShowTodos(ShowTodos event, emit) {
-    emit(TodosLoaded(todos: todosRepository.showTodos()));
+  Future<void> _onShowTodos(event, emit) async {
+    emit(const TodosLoading());
+    try {
+      final todos = await Future.delayed(
+        const Duration(seconds: 3),
+        () {
+          todosRepository.showTodos();
+        },
+      );
+      emit(TodosLoaded(todos: todos));
+    } catch (error) {
+      emit(TodosException(error.toString()));
+    }
   }
 }
 
-  // Future<void> _onCreateTodos(event, emit) async {
-  //   emit(const TodosLoading());
-  //   try {
-  //     final todos = todosRepository.addTodos(event.todo);
-  //     emit(TodosLoaded(todos: todos));
-  //   } catch (e) {
-  //     emit(TodosException(e.toString()));
-  //   }
+  // _onCreateTodos(AddTodo event, emit) {
+  //   emit(TodosLoaded(todos: todosRepository.addTodos(event.todo)));
   // }
 
-  //  Future<void> _onDeleteTodos(event, emit) async {
-  //   emit(const TodosLoading());
-  //   try {
-  //     final todos = todosRepository.deleteTodos(event.todo);
-  //     emit(TodosLoaded(todos: todos));
-  //   } catch (error) {
-  //     emit(TodosException(error.toString()));
-  //   }
+  // _onDeleteTodos(RemoveTodo event, emit) {
+  //   emit(TodosLoaded(todos: todosRepository.deleteTodos(event.todo)));
   // }
 
-  //  Future<void> _onShowTodos(event, emit) async {
-  //   emit(const TodosLoading());
-  //   try {
-  //     final todos = todosRepository.showTodos(event.todo);
-  //     emit(TodosLoaded(todos: todos));
-  //   } catch (error) {
-  //     emit(TodosException(error.toString()));
-  //   }
+  //  _onShowTodos(ShowTodos event, emit) {
+  //   emit(TodosLoaded(todos: todosRepository.showTodos()));
+
+  // _onUpdateTodos(UpdateTodo event, emit) {
+  //   emit(TodosLoaded(
+  //       todos: todosRepository.updateTodos(event.todo, event.title)));
   // }

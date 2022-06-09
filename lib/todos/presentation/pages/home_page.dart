@@ -99,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                                               title: _textControllerEdit.text,
                                               todo: todosList[index]),
                                         );
-                                        // TodosRepositoryFake.todos[index] = _textControllerEdit.text;
                                         Navigator.pop(context);
                                       });
                                     },
@@ -114,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   );
                 }
-                return Container();
+                return const Center(child: Text('Lista está vazia'));
               },
             ),
           )
