@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../domain/model/todos_model.dart';
 
- class TodosState extends Equatable {
+ abstract class TodosState extends Equatable {
   const TodosState();
 
   @override
